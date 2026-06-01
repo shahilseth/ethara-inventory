@@ -26,6 +26,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "https://ethara-inventory.vercel.app",
+        "https://ethara-inventory-git-main-shahil-seths-projects.vercel.app",
+        "https://ethara-inventory-dboxxihbl-shahil-seths-projects.vercel.app",
         "https://*.vercel.app",
     ],
     allow_methods=["*"],
