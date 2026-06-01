@@ -22,7 +22,7 @@ def _load_order(db: Session, order_id: UUID) -> Order:
     )
 
 
-@router.post("/", response_model=OrderResponse, status_code=201)
+@router.post("", response_model=OrderResponse, status_code=201)
 def create_order(order_in: OrderCreate, db: Session = Depends(get_db)):
     if not db.query(Customer).filter(Customer.id == order_in.customer_id).first():
         raise HTTPException(status_code=404, detail="Customer not found")
@@ -79,7 +79,7 @@ def create_order(order_in: OrderCreate, db: Session = Depends(get_db)):
     return _load_order(db, db_order.id)
 
 
-@router.get("/", response_model=List[OrderResponse])
+@router.get("", response_model=List[OrderResponse])
 def list_orders(db: Session = Depends(get_db)):
     return (
         db.query(Order)

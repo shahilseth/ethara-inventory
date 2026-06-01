@@ -11,7 +11,7 @@ from app.schemas.customer import CustomerCreate, CustomerResponse
 router = APIRouter()
 
 
-@router.post("/", response_model=CustomerResponse, status_code=201)
+@router.post("", response_model=CustomerResponse, status_code=201)
 def create_customer(customer: CustomerCreate, db: Session = Depends(get_db)):
     if db.query(Customer).filter(Customer.email == customer.email).first():
         raise HTTPException(status_code=409, detail="Email already registered")
@@ -22,7 +22,7 @@ def create_customer(customer: CustomerCreate, db: Session = Depends(get_db)):
     return db_customer
 
 
-@router.get("/", response_model=List[CustomerResponse])
+@router.get("", response_model=List[CustomerResponse])
 def list_customers(db: Session = Depends(get_db)):
     return db.query(Customer).all()
 

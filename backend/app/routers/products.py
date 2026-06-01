@@ -11,7 +11,7 @@ from app.schemas.product import ProductCreate, ProductResponse, ProductUpdate
 router = APIRouter()
 
 
-@router.post("/", response_model=ProductResponse, status_code=201)
+@router.post("", response_model=ProductResponse, status_code=201)
 def create_product(product: ProductCreate, db: Session = Depends(get_db)):
     if db.query(Product).filter(Product.sku == product.sku).first():
         raise HTTPException(status_code=409, detail=f"SKU '{product.sku}' already exists")
@@ -22,7 +22,7 @@ def create_product(product: ProductCreate, db: Session = Depends(get_db)):
     return db_product
 
 
-@router.get("/", response_model=List[ProductResponse])
+@router.get("", response_model=List[ProductResponse])
 def list_products(db: Session = Depends(get_db)):
     return db.query(Product).all()
 
